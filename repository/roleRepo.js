@@ -1,19 +1,29 @@
-module.exports = function (){
-    return {
-        getAll(){
-            //Call db with the command 
-            //SELECT * FROM employee_tracker.role;
-        },
-        add(role) {
-            //Call the db to add one role
+const dbConnector = require('./db');
 
-        },
-        delete(roleId){
-            //Call the db to delete one departmet using its id.
 
-        },
-        update(role){
-            //CAll the db to update a role row.
-        }
+module.exports = class roleRepo {
+    sqlConnector = new dbConnector();
+
+    constructor(){
+        this.sqlConnector.connect('root','');
+    }
+
+    findOne(roleId, cb){
+        this.sqlConnector.execute(`SELECT * FROM \`employee_tracker\`.\`role\` WHERE id=${roleId};`, cb);
+    }
+    getAll(cb){
+        this.sqlConnector.execute('SELECT * FROM role;', cb);
+    }
+
+    add(role, cb){
+        this.sqlConnector.execute(`INSERT INTO \`employee_tracker\`.\`role\` (\`title\`, \`salary\`, \`department_id\`) VALUES ('${role.title}', ${role.salary}, ${role.department_id});`, cb);
+    }
+
+    update(role, cb){
+        this.sqlConnector.execute(`UPDATE \`employee_tracker\`.\`role\` SET title = '${role.title}', salary = ${role.salary}, department_id = ${role.department_id} WHERE id= ${role.id};`,cb);
+    }
+
+    delete(roleid, cb){
+        this.sqlConnector.execute(`DELETE FROM \`employee_tracker\`.\`role\` WHERE id =${roleid};`, cb);
     }
 }
