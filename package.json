@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/psurer/employee_tracker#readme",
   "dependencies": {
+    "console.table": "^0.10.0",
+    "inquirer": "^8.1.0",
     "mysql": "github:mysqljs/mysql"
   }
 }

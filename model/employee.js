@@ -1,9 +1,9 @@
-module.exports = function ( id, first_name, last_name, role_id, manager_id ){
-    return {
-        id: id,
-        first_name: first_name,
-        last_name: last_name,
-        role_id: role_id,
-        manager_id: manager_id
+module.exports = class EmployeeModel {
+    constructor ( id, first_name, last_name, role_id, manager_id ){
+        this.id= id;
+        this.first_name= first_name;
+        this.last_name= last_name;
+        this.role_id= role_id;
+        this.manager_id= manager_id;
     }
 }
